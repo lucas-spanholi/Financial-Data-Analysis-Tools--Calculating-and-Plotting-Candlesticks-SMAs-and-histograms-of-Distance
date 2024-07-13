@@ -44,19 +44,19 @@ def calculate_distances(data, *periods, column='Adj Close'):
     return data
 
 def plot_candlestick_with_sma(data):
-    # Verifica se as colunas necessárias estão presentes
+    # Check if the necessary columns are present
     required_columns = ['Open', 'High', 'Low', 'Close']
     for col in required_columns:
         if col not in data.columns:
             raise ValueError(f"Data must contain '{col}' column.")
     
-    # Identifica as colunas de SMA
+    # Identify SMA columns
     sma_columns = [col for col in data.columns if col.startswith('SMA_')]
     
     if not sma_columns:
         raise ValueError("No SMA columns found in the DataFrame. Make sure to calculate SMAs first.")
     
-    # Cria a figura do candlestick
+    # Create the candlestick figure
     fig = go.Figure(data=[go.Candlestick(
         x=data.index,
         open=data['Open'],
@@ -66,7 +66,7 @@ def plot_candlestick_with_sma(data):
         name='Candlestick'
     )])
     
-    # Adiciona as SMAs ao gráfico
+    # Add SMAs to the chart
     for sma_column in sma_columns:
         fig.add_trace(go.Scatter(
             x=data.index,
@@ -75,7 +75,7 @@ def plot_candlestick_with_sma(data):
             name=sma_column
         ))
     
-    # Atualiza o layout do gráfico
+    # Update the layout of the chart
     fig.update_layout(
         title='Candlestick Chart with SMAs',
         xaxis_title='Date',
@@ -86,24 +86,24 @@ def plot_candlestick_with_sma(data):
     fig.show()
 
 def plot_distance_histograms(data, nbins=50):
-    # Identifica as colunas de distância
+    # Identify distance columns
     distance_columns = [col for col in data.columns if col.startswith('Distance_SMA') and col.endswith('%')]
     
     if not distance_columns:
         raise ValueError("No distance columns found in the DataFrame. Make sure to calculate distances first.")
     
-    # Paleta de cores para os histogramas
+    # Color palette for histograms
     colors = ['blue', 'green', 'red', 'purple', 'orange', 'brown', 'pink', 'gray', 'olive', 'cyan']
     
-    # Cria subplots
+    # Create subplots
     fig = make_subplots(rows=len(distance_columns), cols=1, subplot_titles=[f'Distribution of {col}' for col in distance_columns])
     
-    # Adiciona histogramas
+    # Add histograms
     for i, col in enumerate(distance_columns, start=1):
-        color = colors[i % len(colors)]  # Seleciona a cor da paleta, repetindo se necessário
+        color = colors[i % len(colors)]  # Select color from palette, repeating if necessary
         fig.add_trace(go.Histogram(x=data[col], name=col, nbinsx=nbins, marker_color=color, opacity=0.75), row=i, col=1)
     
-    # Ajusta o layout
+    # Update the layout
     fig.update_layout(
         height=400*len(distance_columns),
         title_text="Histograms of Distance Percentages to SMAs",
@@ -113,14 +113,14 @@ def plot_distance_histograms(data, nbins=50):
         margin=dict(l=50, r=50, t=80, b=50)
     )
     
-    # Ajusta os títulos dos eixos
+    # Update axis titles
     fig.update_xaxes(title_text="Distance Percentage (%)")
     fig.update_yaxes(title_text="Frequency")
     
     fig.show()
 
 def check_normality(data):
-    # Identifica as colunas de distância
+    # Identify distance columns
     distance_columns = [col for col in data.columns if col.startswith('Distance_SMA') and col.endswith('%')]
     
     if not distance_columns:
@@ -134,26 +134,26 @@ def check_normality(data):
     
     return normality_results
 
-# Exemplo de uso:
-data = pd.read_csv('your_data.csv')  # Substitua pelo caminho do seu arquivo de dados
+# Example usage:
+data = pd.read_csv('your_data.csv')  # Replace with the path to your data file
 
-# Calcular SMAs usando 'Adj Close'
+# Calculate SMAs using 'Adj Close'
 data = SMA(data, 20, 50, 100, column='Adj Close')
 
-# Calcular distâncias usando 'Adj Close'
+# Calculate distances using 'Adj Close'
 data = calculate_distances(data, 20, 50, 100, column='Adj Close')
 print(data.head())
 
-# Plotar gráfico de candlestick com SMAs
+# Plot candlestick chart with SMAs
 plot_candlestick_with_sma(data)
 
-# Plotar histogramas de distâncias
+# Plot histograms of distances
 plot_distance_histograms(data, nbins=100)
 
-# Verificar normalidade das distâncias
+# Check normality of distances
 normality_results = check_normality(data)
 
-# Exibir resultados dos testes de normalidade
+# Display normality test results
 for col, result in normality_results.items():
     print(f"{col}:")
     print(f"  Statistic: {result['Statistic']}")
@@ -185,19 +185,19 @@ Candlestick Chart with SMAs
 python
 Copiar código
 def plot_candlestick_with_sma(data):
-    # Verifica se as colunas necessárias estão presentes
+    # Check if the necessary columns are present
     required_columns = ['Open', 'High', 'Low', 'Close']
     for col in required_columns:
         if col not in data.columns:
             raise ValueError(f"Data must contain '{col}' column.")
     
-    # Identifica as colunas de SMA
+    # Identify SMA columns
     sma_columns = [col for col in data.columns if col.startswith('SMA_')]
     
     if not sma_columns:
         raise ValueError("No SMA columns found in the DataFrame. Make sure to calculate SMAs first.")
     
-    # Cria a figura do candlestick
+    # Create the candlestick figure
     fig = go.Figure(data=[go.Candlestick(
         x=data.index,
         open=data['Open'],
@@ -207,7 +207,7 @@ def plot_candlestick_with_sma(data):
         name='Candlestick'
     )])
     
-    # Adiciona as SMAs ao gráfico
+    # Add SMAs to the chart
     for sma_column in sma_columns:
         fig.add_trace(go.Scatter(
             x=data.index,
@@ -216,7 +216,7 @@ def plot_candlestick_with_sma(data):
             name=sma_column
         ))
     
-    # Atualiza o layout do gráfico
+    # Update the layout of the chart
     fig.update_layout(
         title='Candlestick Chart with SMAs',
         xaxis_title='Date',
@@ -231,24 +231,24 @@ Histogram Plotting
 python
 Copiar código
 def plot_distance_histograms(data, nbins=50):
-    # Identifica as colunas de distância
+    # Identify distance columns
     distance_columns = [col for col in data.columns if col.startswith('Distance_SMA') and col.endswith('%')]
     
     if not distance_columns:
         raise ValueError("No distance columns found in the DataFrame. Make sure to calculate distances first.")
     
-    # Paleta de cores para os histogramas
+    # Color palette for histograms
     colors = ['blue', 'green', 'red', 'purple', 'orange', 'brown', 'pink', 'gray', 'olive', 'cyan']
     
-    # Cria subplots
+    # Create subplots
     fig = make_subplots(rows=len(distance_columns), cols=1, subplot_titles=[f'Distribution of {col}' for col in distance_columns])
     
-    # Adiciona histogramas
+    # Add histograms
     for i, col in enumerate(distance_columns, start=1):
-        color = colors[i % len(colors)]  # Seleciona a cor da paleta, repetindo se necessário
+        color = colors[i % len(colors)]  # Select color from palette, repeating if necessary
         fig.add_trace(go.Histogram(x=data[col], name=col, nbinsx=nbins, marker_color=color, opacity=0.75), row=i, col=1)
     
-    # Ajusta o layout
+    # Update the layout
     fig.update_layout(
         height=400*len(distance_columns),
         title_text="Histograms of Distance Percentages to SMAs",
@@ -258,7 +258,7 @@ def plot_distance_histograms(data, nbins=50):
         margin=dict(l=50, r=50, t=80, b=50)
     )
     
-    # Ajusta os títulos dos eixos
+    # Update axis titles
     fig.update_xaxes(title_text="Distance Percentage (%)")
     fig.update_yaxes(title_text="Frequency")
     
@@ -269,7 +269,7 @@ Normality Testing
 python
 Copiar código
 def check_normality(data):
-    # Identifica as colunas de distância
+    # Identify distance columns
     distance_columns = [col for col in data.columns if col.startswith('Distance_SMA') and col.endswith('%')]
     
     if not distance_columns:
@@ -289,3 +289,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 Contributing
 If you have any suggestions or improvements, feel free to create a pull request or open an issue.
+
