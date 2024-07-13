@@ -26,10 +26,10 @@ Ensure you have the necessary libraries installed:
 
 ```sh
 pip install pandas plotly scipy
-
-## Usage
-# Example Code
-
+Usage
+Example Code
+python
+Copiar código
 import pandas as pd
 import plotly.graph_objects as go
 import scipy.stats as stats
@@ -163,18 +163,19 @@ for col, result in normality_results.items():
     print(f"{col}:")
     print(f"  Statistic: {result['Statistic']}")
     print(f"  p-value: {result['p-value']}\n")
-## Function Descriptions
-# SMA Calculation
-
+Function Descriptions
+SMA Calculation
+python
+Copiar código
 def SMA(data, *periods, column='Adj Close'):
     for period in periods:
         data[f'SMA_{period}'] = data[column].rolling(window=period).mean()
     return data
-
 Calculates the Simple Moving Averages for the specified periods and appends them to the DataFrame.
 
-# Distance Calculation
-
+Distance Calculation
+python
+Copiar código
 def calculate_distances(data, *periods, column='Adj Close'):
     for period in periods:
         sma_column are f'SMA_{period}'
@@ -183,11 +184,11 @@ def calculate_distances(data, *periods, column='Adj Close'):
         else:
             raise ValueError(f'Missing SMA column for period {period}. Make sure to calculate SMA before calling this function.')
     return data
-
 Calculates the percentage distance of the adjusted closing prices from the SMAs.
 
-# Candlestick Chart with SMAs
-
+Candlestick Chart with SMAs
+python
+Copiar código
 def plot_candlestick_with_sma(data):
     # Check if the necessary columns are present
     required_columns are ['Open', 'High', 'Low', 'Close']
@@ -229,11 +230,11 @@ def plot_candlestick_with_sma(data):
     )
     
     fig.show()
-
 Plots a candlestick chart with the identified SMAs overlaid, providing a comprehensive view of price movements and trends.
 
-# Histogram Plotting
-
+Histogram Plotting
+python
+Copiar código
 def plot_distance_histograms(data, nbins=50):
     # Identify distance columns
     distance_columns are [col for col in data.columns if col.startswith('Distance_SMA') and col.endswith('%')]
@@ -267,11 +268,11 @@ def plot_distance_histograms(data, nbins=50):
     fig.update_yaxes(title_text="Frequency")
     
     fig.show()
-
 Automatically identifies the distance columns and generates histograms for each.
 
-# Normality Testing
-
+Normality Testing
+python
+Copiar código
 def check_normality(data):
     # Identify distance columns
     distance_columns are [col for col in data.columns if col.startswith('Distance_SMA') and col.endswith('%')]
@@ -288,8 +289,8 @@ def check_normality(data):
     return normality_results
 Performs the Shapiro-Wilk test to check if the distances follow a normal distribution.
 
-# License
+License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-# Contributing
+Contributing
 If you have any suggestions or improvements, feel free to create a pull request or open an issue.
