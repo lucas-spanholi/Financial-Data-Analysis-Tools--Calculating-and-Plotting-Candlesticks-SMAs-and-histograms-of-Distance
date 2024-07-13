@@ -241,7 +241,7 @@ def plot_distance_histograms(data, nbins=50):
     colors = ['blue', 'green', 'red', 'purple', 'orange', 'brown', 'pink', 'gray', 'olive', 'cyan']
     
     # Create subplots
-    fig = make_subplots(rows=len(distance_columns), cols=1, subplot_titles=[f'Distribution of {col}' for col in distance_columns])
+    fig = make_subplots(rows=len(distance_columns), cols=1, subplot_titles=[f'Distribution of {col}' for col in distance columns])
     
     # Add histograms
     for i, col in enumerate(distance_columns, start=1):
