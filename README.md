@@ -27,8 +27,8 @@ Ensure you have the necessary libraries installed:
 ```sh
 pip install pandas plotly scipy
 
-Usage
-Example Code
+##Usage
+#Example Code
 
 import pandas as pd
 import plotly.graph_objects as go
@@ -164,17 +164,17 @@ for col, result in normality_results.items():
     print(f"  Statistic: {result['Statistic']}")
     print(f"  p-value: {result['p-value']}\n")
 
-Function Descriptions
-SMA Calculation
+# Function Descriptions
+# SMA Calculation
 
 def SMA(data, *periods, column='Close'):
     for period in periods:
         data[f'SMA_{period}'] = data[column].rolling(window=period).mean()
     return data
 
-Calculates the Simple Moving Averages for the specified periods and appends them to the DataFrame.
+# Calculates the Simple Moving Averages for the specified periods and appends them to the DataFrame.
 
-Distance Calculation
+# Distance Calculation
 
 def calculate_distances(data, *periods, column='Close'):
     for period in periods:
@@ -185,9 +185,9 @@ def calculate_distances(data, *periods, column='Close'):
             raise ValueError(f'Missing SMA column for period {period}. Make sure to calculate SMA before calling this function.')
     return data
 
-Calculates the percentage distance of the adjusted closing prices from the SMAs.
+# Calculates the percentage distance of the adjusted closing prices from the SMAs.
 
-Candlestick Chart with SMAs
+## Candlestick Chart with SMAs
 
 def plot_candlestick_with_sma(data):
     # Check if the necessary columns are present
@@ -231,9 +231,9 @@ def plot_candlestick_with_sma(data):
     
     fig.show()
 
-Plots a candlestick chart with the identified SMAs overlaid, providing a comprehensive view of price movements and trends.
+# Plots a candlestick chart with the identified SMAs overlaid, providing a comprehensive view of price movements and trends.
 
-Histogram Plotting
+## Histogram Plotting
 
 def plot_distance_histograms(data, nbins=50):
     # Identify distance columns
@@ -269,9 +269,9 @@ def plot_distance_histograms(data, nbins=50):
     
     fig.show()
 
-Automatically identifies the distance columns and generates histograms for each.
+# Automatically identifies the distance columns and generates histograms for each.
 
-Normality Testing
+## Normality Testing
 
 def check_normality(data):
     # Identify distance columns
