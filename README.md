@@ -1,0 +1,2 @@
+# Financial-Data-Analysis-Tools--Calculating-and-Plotting-Candlesticks-SMAs-and-histograms-of-Distance
+This repository provides a set of Python functions designed for financial data analysis, specifically focusing on calculating Simple Moving Averages (SMA), computing the distance of stock prices from these SMAs, visualizing the distributions of these distances, testing for normality, and plotting candlestick charts with SMAs.
