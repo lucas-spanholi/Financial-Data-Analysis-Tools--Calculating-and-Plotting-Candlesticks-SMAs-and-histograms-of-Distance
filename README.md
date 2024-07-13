@@ -241,7 +241,7 @@ def plot_distance_histograms(data, nbins=50):
     colors = ['blue', 'green', 'red', 'purple', 'orange', 'brown', 'pink', 'gray', 'olive', 'cyan']
     
     # Create subplots
-    fig = make_subplots(rows=len(distance_columns), cols=1, subplot_titles=[f'Distribution of {col}' for col in distance columns])
+    fig = make_subplots(rows=len(distance_columns), cols=1, subplot_titles=[f'Distribution of {col}' for col in distance_columns])
     
     # Add histograms
     for i, col in enumerate(distance_columns, start=1):
@@ -272,12 +272,12 @@ def check_normality(data):
     # Identify distance columns
     distance_columns = [col for col in data.columns if col.startswith('Distance_SMA') and col.endswith('%')]
     
-    if not distance columns:
+    if not distance_columns:
         raise ValueError("No distance columns found in the DataFrame. Make sure to calculate distances first.")
     
     normality_results = {}
     
-    for col in distance columns:
+    for col in distance_columns:
         stat, p_value = stats.shapiro(data[col].dropna())
         normality_results[col] = {'Statistic': stat, 'p-value': p_value}
     
@@ -289,3 +289,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 Contributing
 If you have any suggestions or improvements, feel free to create a pull request or open an issue.
+
