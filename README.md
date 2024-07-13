@@ -289,3 +289,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 Contributing
 If you have any suggestions or improvements, feel free to create a pull request or open an issue.
+
